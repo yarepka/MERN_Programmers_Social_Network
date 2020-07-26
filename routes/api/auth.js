@@ -23,7 +23,7 @@ router.get('/', auth, async (req, res) => {
 });
 
 // @route   POST api/auth
-// @desc    Authenticate user & get token
+// @desc    Login & get token
 // @access  Public (Public - don't need token to acces route)
 router.post('/', [
   body('email', 'Please include a valid email').isEmail(),
@@ -40,7 +40,7 @@ router.post('/', [
     // See if user exists
     let user = await User.findOne({ email: email });
 
-    // if no user with such email
+    // user does not exists
     if (!user) {
       return res.status(400).json({ errors: [{ msg: 'Invalid Credentials' }] });
     }
@@ -48,6 +48,7 @@ router.post('/', [
     // check wehenever password is matches
     const isMatch = await bcrypt.compare(password, user.password);
 
+    // password do not match
     if (!isMatch) {
       return res.status(400).json({ errors: [{ msg: 'Invalid Credentials' }] });
     }

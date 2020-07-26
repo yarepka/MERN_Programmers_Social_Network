@@ -10,7 +10,7 @@ const { body, validationResult } = require('express-validator');
 const User = require('../../models/User');
 
 // @route   POST api/users
-// @desc    Register user
+// @desc    Register user & get token
 // @access  Public (Public - don't need token to acces route)
 router.post('/', [
   body('name', 'Name is required').not().isEmpty(),
