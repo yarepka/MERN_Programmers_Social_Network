@@ -7,6 +7,7 @@ const { body, validationResult } = require('express-validator');
 
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
+const Post = require('../../models/Post');
 
 // @route   GET api/profile/me
 // @desc    Get current users profile
@@ -17,8 +18,6 @@ router.get('/me', auth, async (req, res) => {
     // populate() adds 2 more properties (name and avatar) to
     // user property of profile object
     const profile = await Profile.findOne({ user: req.user.id }).populate('user', ['name', 'avatar']);
-
-    console.log('Profile: ', profile);
 
     if (!profile) {
       return res.status(400).json({ msg: 'There is no profile for this user' });
@@ -71,11 +70,11 @@ router.post('/', [auth, [
   if (bio) profileFields.bio = bio;
   if (status) profileFields.status = status;
   if (githubusername) profileFields.githubusername = githubusername;
-  if (skills) {
-    profileFields.skills =
-      skills
-        .split(',')
-        .map(el => el.trim());
+
+  if (Array.isArray(skills)) {
+    profileFields.skills = skills;
+  } else {
+    profileFields.skills = skills.split(',').map(el => el.trim());
   }
 
   // Build social object
@@ -153,7 +152,8 @@ router.get('/user/:user_id', async (req, res) => {
 // @access  Private (need token)
 router.delete('/', auth, async (req, res) => {
   try {
-    // @todo - remove user posts
+    // Remove user posts
+    await Post.deleteMany({ user: req.user.id });
 
     // Remove profile
     await Profile.findOneAndRemove({ user: req.user.id });

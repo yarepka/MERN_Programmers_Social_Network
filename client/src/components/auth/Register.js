@@ -90,7 +90,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
         <input type="submit" value="Register" className="btn btn-primary" />
       </form>
       <p className="my-1">
-        Already have an account?
+        Already have an account?{' '}
         <Link to="/login">
           Sign In
         </Link>
