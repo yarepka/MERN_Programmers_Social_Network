@@ -1,24 +1,33 @@
 import axios from 'axios';
 import { setAlert } from './alert';
+import { loadUser } from './auth';
 
 import {
   GET_PROFILE,
+  GET_PROFILES,
   PROFILE_ERROR,
   UPDATE_PROFILE,
   CLEAR_PROFILE,
-  ACCOUNT_DELETED
+  ACCOUNT_DELETED,
+  GET_REPOS,
+  LOADING
 } from './types';
 
 // Get current users profile
 export const getCurrentProfile = () => {
   return async dispatch => {
+    dispatch({
+      type: LOADING
+    });
+
     try {
+      dispatch(loadUser());
       const res = await axios.get('/api/profile/me');
 
       dispatch({
         type: GET_PROFILE,
         payload: res.data
-      })
+      });
     } catch (err) {
       dispatch({
         type: PROFILE_ERROR,
@@ -27,6 +36,75 @@ export const getCurrentProfile = () => {
     }
   }
 }
+
+// Get all profiles
+export const getProfiles = () => {
+  return async dispatch => {
+    dispatch({ type: CLEAR_PROFILE });
+
+    try {
+      dispatch({
+        type: LOADING
+      });
+
+      const res = await axios.get('api/profile');
+
+      dispatch({
+        type: GET_PROFILES,
+        payload: res.data
+      });
+    } catch (err) {
+      dispatch({
+        type: PROFILE_ERROR,
+        payload: { msg: err.response.statusText, status: err.response.status }
+      });
+    }
+  }
+};
+
+// Get profile by ID
+export const getProfileById = userId => {
+  return async dispatch => {
+    try {
+      dispatch({
+        type: LOADING
+      });
+      console.log(userId);
+      const res = await axios.get(`/api/profile/user/${userId}`);
+
+      console.log('res.data: ' + res.data);
+      dispatch({
+        type: GET_PROFILE,
+        payload: res.data
+      });
+    } catch (err) {
+      console.log(err);
+      dispatch({
+        type: PROFILE_ERROR,
+        payload: { msg: err.response.statusText, status: err.response.status }
+      });
+    }
+  }
+};
+
+// Get Github repos
+export const getGithubRepos = username => {
+  return async dispatch => {
+    try {
+      const res = await axios.get(`/api/profile/github/${username}`);
+
+      dispatch({
+        type: GET_REPOS,
+        payload: res.data
+      });
+    } catch (err) {
+      dispatch({
+        type: PROFILE_ERROR,
+        payload: { msg: err.response.statusText, status: err.response.status }
+      });
+    }
+  }
+};
 
 // Create or update profile
 export const createProfile = (formData, history, edit = false) => {
