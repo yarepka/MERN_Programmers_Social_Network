@@ -22,7 +22,7 @@ const ProfileEducation = ({ education: {
 
 
 ProfileEducation.propTypes = {
-  education: PropTypes.array.isRequired,
+
 }
 
 export default ProfileEducation

@@ -19,7 +19,7 @@ const ProfileGithub = ({ username, getGithubRepos, repos, loading }) => {
       repos.map(repo => (
         <div
           key={repo.id}
-          className="repo bg-white p-1 my-1"
+          className="repo bg-white my-1 p-1"
         >
           <div>
             <h4>
@@ -29,6 +29,7 @@ const ProfileGithub = ({ username, getGithubRepos, repos, loading }) => {
             </h4>
             <p>{repo.description}</p>
           </div>
+
           <div>
             <ul>
               <li className="badge badge-primary">
