@@ -38,7 +38,11 @@ const Post = ({ match }) => {
       <PostItem post={post} showActions={false} />
       <CommentForm postId={post._id} />
       <div className='comments'>
-        {loadingComment && <Spinner />}
+        {loadingComment && (
+          <Spinner
+            style={{ width: '300px', margin: 'auto', display: 'block' }}
+          />
+        )}
         {post.comments.map((comment) => (
           <CommentItem key={comment._id} comment={comment} postId={post._id} />
         ))}

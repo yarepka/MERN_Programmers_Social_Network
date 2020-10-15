@@ -56,7 +56,9 @@ const Posts = ({ history }) => {
         <i className='fas fa-user'></i> Welcome to the community
       </p>
       <PostForm />
-      {loadingPost && <Spinner />}
+      {loadingPost && (
+        <Spinner style={{ width: '300px', margin: 'auto', display: 'block' }} />
+      )}
       {addedPosts.length > 0 && addedPostsItems}
       {posts && (
         <InfiniteScroll hasMore={hasMore} loadMore={loadPosts}>
