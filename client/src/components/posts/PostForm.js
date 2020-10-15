@@ -1,40 +1,36 @@
-import React, { Fragment, useState } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { addPost } from '../../actions/post';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
-const PostForm = ({ addPost }) => {
+import { addPost } from '../../redux/actions/postActions';
+
+const PostForm = () => {
+  const dispatch = useDispatch();
   const [text, setText] = useState('');
 
-  const onSubmitHandler = e => {
+  const onSubmitHandler = (e) => {
     e.preventDefault();
-    addPost({ text });
+    dispatch(addPost({ text }));
     setText('');
-  }
+  };
 
   return (
-    <div class="post-form">
-      <div class="post-form-header bg-primary">
+    <div className='post-form'>
+      <div className='post-form-header bg-primary'>
         <h3>Say Something...</h3>
       </div>
 
-      <form class="form my-1" onSubmit={onSubmitHandler}>
+      <form className='form my-1' onSubmit={onSubmitHandler}>
         <textarea
-          cols="30"
-          rows="5"
-          placeholder="Create a post"
+          cols='30'
+          rows='5'
+          placeholder='Create a post'
           value={text}
-          onChange={e => setText(e.target.value)}
+          onChange={(e) => setText(e.target.value)}
         ></textarea>
-        <input type="submit" value="Submit" class="btn btn-dark my-1" />
+        <input type='submit' value='Submit' className='btn btn-dark my-1' />
       </form>
     </div>
   );
 };
 
-PostForm.propTypes = {
-  addPost: PropTypes.func.isRequired
-};
-
-export default connect(null, { addPost })(PostForm);
-
+export default PostForm;

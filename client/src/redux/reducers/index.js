@@ -8,6 +8,7 @@ import {
   profileReposReducer,
   profileCurrentReducer,
 } from './profileReducers';
+import { postLoadPageReducer, postSingleReducer } from './postReducers';
 
 export default combineReducers({
   userLogin: userLoginReducer,
@@ -16,5 +17,7 @@ export default combineReducers({
   profileSingle: profileSingleReducer,
   profileRepos: profileReposReducer,
   profileCurrent: profileCurrentReducer,
+  postLoadPage: postLoadPageReducer,
+  postSingle: postSingleReducer,
   alertManager: alertManagerReducer,
 });

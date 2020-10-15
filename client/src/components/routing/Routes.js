@@ -9,6 +9,8 @@ import AddEducation from '../profile-forms/AddEducations';
 import AddExperience from '../profile-forms/AddExperience';
 import CreateProfile from '../profile-forms/CreateProfile';
 import EditProfile from '../profile-forms/EditProfile';
+import Posts from '../posts/Posts';
+import Post from '../post/Post';
 import Alert from '../layout/Alert';
 import NotFound from '../layout/NotFound';
 
@@ -26,8 +28,8 @@ const Routes = () => {
         <Route exact path='/add-experience' component={AddExperience} />
         <Route exact path='/create-profile' component={CreateProfile} />
         <Route exact path='/edit-profile' component={EditProfile} />
-        {/* <Route exact path='/posts' component={Posts} />
-        <Route exact path='/posts/:id' component={Post} /> */}
+        <Route exact path='/posts' component={Posts} />
+        <Route exact path='/posts/:id' component={Post} />
         <Route component={NotFound} />
       </Switch>
     </section>

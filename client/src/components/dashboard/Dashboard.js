@@ -10,6 +10,7 @@ import {
   getCurrentProfile,
   deleteAccount,
 } from '../../redux/actions/profileActions';
+import { ALERT_RESET } from '../../redux/actions/types';
 
 const Dashboard = ({ history }) => {
   const dispatch = useDispatch();
@@ -30,6 +31,12 @@ const Dashboard = ({ history }) => {
     dispatch(getCurrentProfile());
   }, [deleted]);
 
+  useEffect(() => {
+    return () => {
+      dispatch({ type: ALERT_RESET });
+    };
+  }, []);
+
   const deleteAccountHandler = (profileId) => {
     // TODO
     console.log('Delete account: ', profileId);
@@ -42,7 +49,7 @@ const Dashboard = ({ history }) => {
     <Fragment>
       <h1 className='large text-primary'>Dashboard</h1>
       <p className='lead'>
-        <i className='fas fa-user'></i> Welcome {userInfo.name}
+        <i className='fas fa-user'></i> Welcome {userInfo && userInfo.name}
       </p>
       {profile ? (
         <Fragment>

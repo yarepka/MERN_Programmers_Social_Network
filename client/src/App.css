@@ -34,6 +34,10 @@ img {
   width: 100%;
 }
 
+table {
+  width: 100%;
+}
+
 /* Utilities */
 .container {
   max-width: 1100px;
@@ -567,11 +571,20 @@ button {
     margin-bottom: 0.2rem;
   }
 
-  .post {
-    grid-template-columns: 1fr;
-  }
   .post a,
   .post button {
     padding: 0.3rem 0.4rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .post {
+    grid-template-columns: 1fr;
+    grid-gap: 0;
+  }
+
+  .block-on-mobile {
+    display: block;
+    width: 100%;
   }
 }

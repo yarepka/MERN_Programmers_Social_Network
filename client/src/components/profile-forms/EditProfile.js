@@ -36,7 +36,7 @@ const EditProfile = ({ history }) => {
   useEffect(() => {
     if (!profile) dispatch(getCurrentProfile());
     const profileData = { ...initialState };
-    if (!loading) {
+    if (!loading && profile) {
       for (const key in profile) {
         if (key in profileData) profileData[key] = profile[key];
       }

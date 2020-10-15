@@ -11,6 +11,7 @@ import {
   PROFILE_LOAD_REPOS_RESET,
   PROFILE_LOAD_CURRENT_SUCCESS,
   PROFILE_LOAD_CURRENT_FAIL,
+  PROFILE_LOAD_CURRENT_RESET,
   PROFILE_CREATE_SUCCESS,
   PROFILE_CREATE_FAIL,
   PROFILE_UPDATE_SUCCESS,
@@ -148,6 +149,10 @@ export const profileCurrentReducer = (state = { loading: true }, action) => {
         ...state,
         loading: false,
         error: payload,
+      };
+    case PROFILE_LOAD_CURRENT_RESET:
+      return {
+        loading: true,
       };
     case PROFILE_DELETE_SUCCESS:
       return {

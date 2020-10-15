@@ -9,6 +9,7 @@ import {
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAIL,
   USER_LOGOUT,
+  PROFILE_LOAD_CURRENT_RESET,
 } from './types';
 
 // Register User
@@ -117,5 +118,6 @@ export const logout = () => {
   return (dispatch) => {
     localStorage.removeItem('userInfo');
     dispatch({ type: USER_LOGOUT });
+    dispatch({ type: PROFILE_LOAD_CURRENT_RESET });
   };
 };

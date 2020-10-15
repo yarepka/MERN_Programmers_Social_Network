@@ -303,7 +303,7 @@ export const createProfile = (formData, history, edit = false) => {
           'x-auth-token': userInfo.token,
         },
       };
-
+      
       const res = await axios.post('/api/profile', formData, config);
 
       dispatch({
