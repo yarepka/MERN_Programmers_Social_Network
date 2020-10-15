@@ -9,7 +9,7 @@ import {
   GET_POST,
   ADD_COMMENT,
   REMOVE_COMMENT
-} from './types';
+} from './typesOld';
 
 // Get posts
 export const getPosts = () => {

@@ -5,7 +5,12 @@ export default () => (
   <Fragment>
     <img
       src={spinner}
-      style={{ width: '200px', margin: 'auto', display: 'block' }}
+      style={{
+        width: '600px',
+        margin: 'auto',
+        display: 'block',
+        maxWidth: '100%',
+      }}
       alt='Loading'
     />
   </Fragment>

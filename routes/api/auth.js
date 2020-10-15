@@ -25,57 +25,63 @@ router.get('/', auth, async (req, res) => {
 // @route   POST api/auth
 // @desc    Login & get token
 // @access  Public (Public - don't need token to acces route)
-router.post('/', [
-  body('email', 'Please include a valid email').isEmail(),
-  body('password', 'Password is required').exists()
-], async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-
-  const { email, password } = req.body;
-
-  try {
-    // See if user exists
-    let user = await User.findOne({ email: email });
-
-    // user does not exists
-    if (!user) {
-      return res.status(400).json({ errors: [{ msg: 'Invalid Credentials' }] });
+router.post(
+  '/',
+  [
+    body('email', 'Please include a valid email').isEmail(),
+    body('password', 'Password is required').exists(),
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
     }
 
-    // check wehenever password is matches
-    const isMatch = await bcrypt.compare(password, user.password);
+    const { email, password } = req.body;
 
-    // password do not match
-    if (!isMatch) {
-      return res.status(400).json({ errors: [{ msg: 'Invalid Credentials' }] });
+    try {
+      // See if user exists
+      let user = await User.findOne({ email: email });
+
+      // user does not exists
+      if (!user) {
+        return res
+          .status(400)
+          .json({ errors: [{ msg: 'Invalid Credentials' }] });
+      }
+
+      // check wehenever password is matches
+      const isMatch = await bcrypt.compare(password, user.password);
+
+      // password do not match
+      if (!isMatch) {
+        return res
+          .status(400)
+          .json({ errors: [{ msg: 'Invalid Credentials' }] });
+      }
+
+      // create payload
+      const payload = {
+        user: {
+          id: user.id,
+        },
+      };
+
+      // sign token
+      jwt.sign(
+        payload,
+        config.get('jwtSecret'), // stored at config/default.json
+        { expiresIn: '30d' }, // should be 3600s = 1 hour
+        (err, token) => {
+          if (err) throw err;
+          return res.json({ token: token });
+        }
+      );
+    } catch (err) {
+      console.error(err.message);
+      return res.state(500).send('Server error');
     }
-
-    // create payload
-    const payload = {
-      user: {
-        id: user.id
-      }
-    };
-
-    // sign token
-    jwt.sign(
-      payload,
-      config.get('jwtSecret'), // stored at config/default.json
-      { expiresIn: 360000 }, // should be 3600s = 1 hour
-      (err, token) => {
-        if (err) throw err;
-        return res.json({ token: token });
-      }
-    );
-
-  } catch (err) {
-    console.error(err.message);
-    return res.state(500).send('Server error');
   }
-
-});
+);
 
 module.exports = router;
