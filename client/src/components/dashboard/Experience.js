@@ -17,7 +17,7 @@ const Experience = ({ experience }) => {
   const experiences = experience.map((exp) => (
     <tr key={exp._id}>
       <td>{exp.company}</td>
-      <td className='hide-sm'>{exp.title}</td>
+      <td>{exp.title}</td>
       <td>
         <Moment format='YYYY/MM/DD'>{exp.from}</Moment> -{' '}
         {exp.to === null ? (
@@ -39,19 +39,23 @@ const Experience = ({ experience }) => {
 
   return (
     <Fragment>
-      <h2 className='my-2'>Experience Credentials</h2>
-      <table className='table'>
-        <thead>
-          <tr>
-            <th>Company</th>
-            <th className='hide-sm'>Title</th>
-            <th className='hide-sm'>Years</th>
-            <th></th>
-          </tr>
-        </thead>
+      <h2 className='my-2 text-align-center-on-mobile'>
+        Experience Credentials
+      </h2>
+      <div className='table-wrapper'>
+        <table className='table'>
+          <thead>
+            <tr>
+              <th>Company</th>
+              <th>Title</th>
+              <th>Years</th>
+              <th></th>
+            </tr>
+          </thead>
 
-        <tbody>{experiences}</tbody>
-      </table>
+          <tbody>{experiences}</tbody>
+        </table>
+      </div>
     </Fragment>
   );
 };

@@ -31,20 +31,20 @@ const PostItem = ({
 
   return (
     <div className='post bg-white p-1 my-1'>
-      <div>
+      <div className='post-top'>
         <Link to={`/profile/${user}`}>
           <img className='round-img' src={avatar} alt='avatar' />
           <h4>{name}</h4>
         </Link>
       </div>
-      <div>
-        <p className='my-1'>{text}</p>
+      <div className='post-bottom'>
+        <p className='post-text my-1'>{text}</p>
         <p className='post-date'>
           Posted on <Moment format='YYYY/MM/DD'>{date}</Moment>
         </p>
 
         {showActions && (
-          <Fragment>
+          <div className='post-buttons'>
             <button
               onClick={onAddLikeHandler}
               type='button'
@@ -75,7 +75,7 @@ const PostItem = ({
                 <i className='fas fa-times'></i>
               </button>
             )}
-          </Fragment>
+          </div>
         )}
       </div>
     </div>

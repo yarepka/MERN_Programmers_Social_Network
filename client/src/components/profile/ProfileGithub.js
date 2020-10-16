@@ -21,13 +21,14 @@ const ProfileGithub = ({ username }) => {
 
       {loading ? (
         <Spinner />
-      ) : (
+      ) : repos.length > 0 ? (
         repos.map((repo) => (
           <div key={repo.id} className='repo bg-white my-1 p-1'>
             <div>
               <h4>
                 <a
                   href={repo.html_url}
+                  className='github-name'
                   target='_blank'
                   rel='noopener noreferrer'
                 >
@@ -50,6 +51,8 @@ const ProfileGithub = ({ username }) => {
             </div>
           </div>
         ))
+      ) : (
+        <h4>No repositories found for this user</h4>
       )}
     </div>
   );

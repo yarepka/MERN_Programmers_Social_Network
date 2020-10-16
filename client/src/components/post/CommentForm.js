@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { ALERT_RESET } from '../../redux/actions/types';
 import { addComment } from '../../redux/actions/postActions';
+import { setAlert } from '../../redux/actions/alertActions';
 
 const CommentForm = ({ postId }) => {
   const dispatch = useDispatch();
@@ -9,9 +11,19 @@ const CommentForm = ({ postId }) => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    dispatch(addComment(postId, { text }));
+    if (!text.trim()) {
+      dispatch(setAlert('Comment must contain text', 'danger'));
+    } else {
+      dispatch(addComment(postId, { text }));
+    }
     setText('');
   };
+
+  useEffect(() => {
+    return () => {
+      dispatch({ type: ALERT_RESET });
+    };
+  }, []);
 
   return (
     <div class='post-form'>
@@ -23,7 +35,7 @@ const CommentForm = ({ postId }) => {
         <textarea
           cols='30'
           rows='5'
-          placeholder='Create a post'
+          placeholder='Create a comment'
           value={text}
           onChange={(e) => setText(e.target.value)}
         ></textarea>

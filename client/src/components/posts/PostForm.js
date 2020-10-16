@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { ALERT_RESET } from '../../redux/actions/types';
 import { addPost } from '../../redux/actions/postActions';
+import { setAlert } from '../../redux/actions/alertActions';
 
 const PostForm = () => {
   const dispatch = useDispatch();
@@ -9,9 +11,19 @@ const PostForm = () => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    dispatch(addPost({ text }));
+    if (!text.trim()) {
+      dispatch(setAlert('Post must contain text', 'danger'));
+    } else {
+      dispatch(addPost({ text }));
+    }
     setText('');
   };
+
+  useEffect(() => {
+    return () => {
+      dispatch({ type: ALERT_RESET });
+    };
+  }, []);
 
   return (
     <div className='post-form'>

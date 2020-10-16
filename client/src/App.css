@@ -230,7 +230,7 @@ table {
 
 /* Overlay */
 .dark-overlay {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.6);
   position: absolute;
   top: 0;
   left: 0;
@@ -549,6 +549,7 @@ button {
   .profile-top img,
   .profile img {
     width: 200px;
+    max-width: 60%;
     margin: auto;
   }
 
@@ -575,16 +576,85 @@ button {
   .post button {
     padding: 0.3rem 0.4rem;
   }
+
+  .table-wrapper {
+    max-width: 100%;
+    overflow: scroll;
+    overflow-y: hidden;
+  }
 }
 
 @media (max-width: 500px) {
+  .block-on-mobile {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
   .post {
     grid-template-columns: 1fr;
     grid-gap: 0;
   }
 
-  .block-on-mobile {
+  .post .post-buttons {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .post .post-bottom .post-text {
+    text-align: center;
+  }
+
+  .profile-github .repo {
     display: block;
-    width: 100%;
+  }
+
+  .profile-exp,
+  .profile-edu {
+    word-wrap: break-word;
+  }
+
+  .repo .github-name {
+    word-wrap: break-word;
+    text-align: center;
+  }
+
+  .repo ul .badge {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .back-to-profiles {
+    margin-bottom: 8px;
+  }
+
+  .p-2 {
+    padding: 1rem;
+  }
+
+  .my-2 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .text-align-center-on-mobile {
+    text-align: center;
+  }
+}
+
+@media (max-width: 300px) {
+  .profile-grid {
+    display: block;
+  }
+
+  .profile-grid > div:not(:last-of-type) {
+    margin-bottom: 1rem;
+  }
+
+  .post .post-buttons {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr;
   }
 }

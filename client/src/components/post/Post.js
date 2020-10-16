@@ -32,7 +32,7 @@ const Post = ({ match }) => {
     <Spinner />
   ) : (
     <Fragment>
-      <Link to='/posts' className='btn'>
+      <Link to='/posts' className='btn block-on-mobile'>
         Back To Posts
       </Link>
       <PostItem post={post} showActions={false} />

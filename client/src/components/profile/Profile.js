@@ -41,11 +41,11 @@ const Profile = ({ match }) => {
         <Spinner />
       ) : (
         <Fragment>
-          <Link to='/profiles' className='btn btn-light'>
+          <Link to='/profiles' className='btn btn-light btn block-on-mobile back-to-profiles'>
             Back To Profiles
           </Link>
           {userInfo && userInfo._id === profile.user._id && (
-            <Link to='/edit-profile' className='btn btn-dark'>
+            <Link to='/edit-profile' className='btn btn-dark btn block-on-mobile'>
               Edit Profile
             </Link>
           )}
