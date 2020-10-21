@@ -58,7 +58,6 @@ export const loadPage = () => {
         },
       });
     } catch (err) {
-      console.log(err);
       dispatch({
         type: POST_LOAD_PAGE_FAIL,
         payload: { msg: err.response.statusText, status: err.response.status },

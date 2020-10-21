@@ -180,8 +180,6 @@ router.get('/user/:user_id', async (req, res) => {
       user: req.params.user_id,
     }).populate('user', ['name', 'avatar']);
 
-    console.log(profile);
-
     if (!profile) return res.status(400).json({ msg: 'Profile not found' });
 
     return res.json(profile);

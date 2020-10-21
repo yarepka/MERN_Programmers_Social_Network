@@ -52,7 +52,6 @@ export const loadPage = () => {
         },
       });
     } catch (err) {
-      console.log(err);
       dispatch({
         type: PROFILE_LOAD_PAGE_FAIL,
         payload: { msg: err.response.statusText, status: err.response.status },
@@ -303,7 +302,7 @@ export const createProfile = (formData, history, edit = false) => {
           'x-auth-token': userInfo.token,
         },
       };
-      
+
       const res = await axios.post('/api/profile', formData, config);
 
       dispatch({

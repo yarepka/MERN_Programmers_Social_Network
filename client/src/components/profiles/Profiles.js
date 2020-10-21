@@ -30,7 +30,6 @@ const Profiles = () => {
   };
 
   const profileItems = profiles.map((profile) => {
-    console.log(profile);
     return <ProfileItem key={profile._id} profile={profile} />;
   });
 

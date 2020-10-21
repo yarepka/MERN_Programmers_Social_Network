@@ -10,7 +10,6 @@ const Education = ({ education }) => {
   const dispatch = useDispatch();
 
   const onDeleteEducationHandler = (educationId) => {
-    console.log('Delete Education: ', educationId);
     dispatch(deleteEducation(educationId));
   };
 

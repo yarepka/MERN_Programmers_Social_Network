@@ -38,8 +38,6 @@ const Dashboard = ({ history }) => {
   }, []);
 
   const deleteAccountHandler = (profileId) => {
-    // TODO
-    console.log('Delete account: ', profileId);
     dispatch(deleteAccount());
   };
 

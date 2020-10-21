@@ -16,8 +16,6 @@ const Post = ({ match }) => {
   const postSingle = useSelector((state) => state.postSingle);
   const { loading, loadingComment, post } = postSingle;
 
-  console.log('post: ', post);
-
   useEffect(() => {
     dispatch(getPost(postId));
   }, [postId]);

@@ -10,7 +10,6 @@ const Experience = ({ experience }) => {
   const dispatch = useDispatch();
 
   const onDeleteExperienceHandler = (experienceId) => {
-    console.log('Delete Experience: ', experienceId);
     dispatch(deleteExperience(experienceId));
   };
 
