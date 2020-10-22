@@ -3,6 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { createProfile } from '../../redux/actions/profileActions';
+import { ALERT_RESET } from '../../redux/actions/types';
 
 const CreateProfile = ({ history }) => {
   const dispatch = useDispatch();

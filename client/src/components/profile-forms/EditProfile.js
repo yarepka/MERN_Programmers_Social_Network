@@ -6,6 +6,7 @@ import {
   createProfile,
   getCurrentProfile,
 } from '../../redux/actions/profileActions';
+import { ALERT_RESET } from '../../redux/actions/types';
 
 const initialState = {
   company: '',
@@ -46,6 +47,12 @@ const EditProfile = ({ history }) => {
       setFormData(profileData);
     }
   }, [profile]);
+
+  useEffect(() => {
+    return () => {
+      dispatch({ type: ALERT_RESET });
+    };
+  }, []);
 
   const [formData, setFormData] = useState({
     company: '',
