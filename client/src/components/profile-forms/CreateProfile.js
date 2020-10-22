@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -43,6 +43,12 @@ const CreateProfile = ({ history }) => {
     youtube,
     instagram,
   } = formData;
+
+  useEffect(() => {
+    return () => {
+      dispatch({ type: ALERT_RESET });
+    };
+  }, []);
 
   const onChangeHandler = (e) => {
     setFormData({
