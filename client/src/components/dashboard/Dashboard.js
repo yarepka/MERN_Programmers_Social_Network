@@ -25,11 +25,7 @@ const Dashboard = ({ history }) => {
 
   useEffect(() => {
     dispatch(getCurrentProfile());
-  }, []); /* DON'T FORGET RERENDER WHEN DELETE=SUCCESS */
-
-  useEffect(() => {
-    dispatch(getCurrentProfile());
-  }, [deleted]);
+  }, []);
 
   useEffect(() => {
     return () => {
