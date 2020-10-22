@@ -1,5 +1,0 @@
-{
-  "mongoURI": "mongodb+srv://yarepka:yarepka@devconnector.c41tb.mongodb.net/test?retryWrites=true&w=majority",
-  "jwtSecret": "mysecrettoken",
-  "githubToken": "535dd59e37ed0224ebcffa140d6761295b3165b1"
-}
