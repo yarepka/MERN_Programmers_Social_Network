@@ -7,6 +7,7 @@ import {
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAIL,
   USER_LOGOUT,
+  PROFILE_DELETE_SUCCESS,
 } from '../actions/types';
 
 export const userLoginReducer = (state = {}, action) => {
@@ -18,6 +19,7 @@ export const userLoginReducer = (state = {}, action) => {
       return { loading: false, userInfo: payload };
     case USER_LOGIN_FAIL:
       return { loading: false, errors: payload };
+    case PROFILE_DELETE_SUCCESS:
     case USER_LOGOUT:
       return {};
     default:
